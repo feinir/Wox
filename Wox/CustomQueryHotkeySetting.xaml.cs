@@ -48,8 +48,7 @@ namespace Wox
                 var pluginHotkey = new CustomPluginHotkey
                 {
                     Hotkey = ctlHotkey.CurrentHotkey.ToString(),
-                    ActionKeyword = tbAction.Text,
-                    AutoRunFirst = cbxAutoRun.IsChecked.Value
+                    ActionKeyword = tbAction.Text
                 };
                 _settings.CustomPluginHotkeys.Add(pluginHotkey);
 
@@ -70,7 +69,6 @@ namespace Wox
                 var oldHotkey = updateCustomHotkey.Hotkey;
                 updateCustomHotkey.ActionKeyword = tbAction.Text;
                 updateCustomHotkey.Hotkey = ctlHotkey.CurrentHotkey.ToString();
-                updateCustomHotkey.AutoRunFirst = cbxAutoRun.IsChecked.Value;
                 //remove origin hotkey
                 RemoveHotkey(oldHotkey);
                 SetHotkey(new HotkeyModel(updateCustomHotkey.Hotkey), delegate
@@ -96,7 +94,6 @@ namespace Wox
 
             tbAction.Text = updateCustomHotkey.ActionKeyword;
             ctlHotkey.SetHotkey(updateCustomHotkey.Hotkey, false);
-            cbxAutoRun.IsChecked = updateCustomHotkey.AutoRunFirst;
             update = true;
             lblAdd.Text = InternationalizationManager.Instance.GetTranslation("update");
         }

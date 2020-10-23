@@ -369,17 +369,10 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn Header="{DynamicResource actionKeywords}" Width="420">
+                            <GridViewColumn Header="{DynamicResource actionKeywords}" Width="500">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate DataType="userSettings:CustomPluginHotkey">
                                         <TextBlock Text="{Binding ActionKeyword}" />
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn Header="{DynamicResource autoRunFirst}" Width="85">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate DataType="userSettings:CustomPluginHotkey">
-                                        <TextBlock Text="{Binding AutoRunFirst}" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>

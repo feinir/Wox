@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -674,16 +673,8 @@ namespace Wox.ViewModel
                 SetHotkey(hotkey.Hotkey, (s, e) =>
                 {
                     if (ShouldIgnoreHotkeys()) return;
-                    if (!hotkey.AutoRunFirst)
-                    {
-                        MainWindowVisibility = Visibility.Visible;
-                        ChangeQueryText(hotkey.ActionKeyword);
-                        QueryResults();
-                    }
-                    else
-                    {                        
-                        OpenActionKeyword(hotkey.ActionKeyword);
-                    }
+                    MainWindowVisibility = Visibility.Visible;
+                    ChangeQueryText(hotkey.ActionKeyword);
                 });
             }
         }
@@ -784,64 +775,6 @@ namespace Wox.ViewModel
             if (Results.Visbility != Visibility.Visible && Results.Count > 0)
             {
                 Results.Visbility = Visibility.Visible;
-            }
-        }
-
-        public void OpenActionKeyword(String actword)
-        {
-            ProcessStartInfo info;
-            var command = actword.Trim();
-            command = Environment.ExpandEnvironmentVariables(command);
-            var workingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-
-            var parts = command.Split(new[] { ' ' }, 2);
-            if (parts.Length == 2)
-            {
-                var filename = parts[0];
-                if (ExistInPath(filename))
-                {
-                    var arguments = parts[1];
-                    info = ShellCommand.SetProcessStartInfo(filename, workingDirectory, arguments);
-                }
-                else
-                {
-                    info = ShellCommand.SetProcessStartInfo(command, workingDirectory);
-                }
-            }
-            else
-            {
-                info = ShellCommand.SetProcessStartInfo(command, workingDirectory);
-            }
-            info.UseShellExecute = true;
-            Process.Start(info);
-        }
-
-        private bool ExistInPath(string filename)
-        {
-            if (File.Exists(filename))
-            {
-                return true;
-            }
-            else
-            {
-                var values = Environment.GetEnvironmentVariable("PATH");
-                if (values != null)
-                {
-                    foreach (var path in values.Split(';'))
-                    {
-                        var path1 = Path.Combine(path, filename);
-                        var path2 = Path.Combine(path, filename + ".exe");
-                        if (File.Exists(path1) || File.Exists(path2))
-                        {
-                            return true;
-                        }
-                    }
-                    return false;
-                }
-                else
-                {
-                    return false;
-                }
             }
         }
 

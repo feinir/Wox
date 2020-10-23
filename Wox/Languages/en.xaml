@@ -70,7 +70,6 @@
     <system:String x:Key="add">Add</system:String>
     <system:String x:Key="pleaseSelectAnItem">Please select an item</system:String>
     <system:String x:Key="deleteCustomHotkeyWarning">Are you sure you want to delete {0} plugin hotkey?</system:String>
-    <system:String x:Key="autoRunFirst">AutoRunFirst</system:String>
 
     <!--Setting Proxy-->
     <system:String x:Key="proxy">HTTP Proxy</system:String>
