@@ -20,6 +20,8 @@
             <ComboBox Grid.Row="3" x:Name="ShellComboBox" Margin="10" HorizontalAlignment="Left" >
                 <ComboBoxItem>CMD</ComboBoxItem>
                 <ComboBoxItem>PowerShell</ComboBoxItem>
+                <ComboBoxItem>ConEmu</ComboBoxItem>
+                <ComboBoxItem>WSLBash</ComboBoxItem>
                 <ComboBoxItem>RunCommand</ComboBoxItem>
             </ComboBox>
         </Grid>

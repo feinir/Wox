@@ -193,6 +193,16 @@ namespace Wox.Plugin.Shell
                 }
 
                 info = ShellCommand.SetProcessStartInfo("powershell.exe", workingDirectory, arguments, runAsAdministratorArg);
+            }else if (_settings.Shell == Shell.ConEmu)
+            {
+                var arguments = _settings.LeaveShellOpen ? $"-run {{Shells::cmd}} {command}" : $"-run {{Shells::cmd}} {command} & exit";
+                info = ShellCommand.SetProcessStartInfo("ConEmu64.exe", workingDirectory, arguments, runAsAdministratorArg);
+            }
+            else if (_settings.Shell == Shell.WSLBash && _settings.SupportWSL)
+            {
+                var arguments = _settings.LeaveShellOpen ? $"-run {{Bash::bash}} {command}; bash;" 
+                    : $"-run {{Bash::bash}} {command}";
+                info = ShellCommand.SetProcessStartInfo("ConEmu64.exe", workingDirectory, arguments, runAsAdministratorArg);
             }
             else if (_settings.Shell == Shell.RunCommand)
             {
@@ -217,19 +227,25 @@ namespace Wox.Plugin.Shell
             }
             else if (_settings.Shell == Shell.Bash && _settings.SupportWSL)
             {
+                /*
                 string arguments;
                 if (_settings.LeaveShellOpen)
                 {
                     // FIXME: How to deal with commands containing single quote?
-                    arguments = $"-c \'{command} ; $SHELL\'";
+                    //arguments = $"/k bash -c \"{command} ; bash;\"";
+                    arguments = $"-run bash.exe -c \"{command} ; bash;\"";
                 }
                 else
                 {
-                    arguments = $"-c \'{command} ; echo -n Press any key to exit... ; read -n1\'";
+                    //arguments = $"/c bash -c \"{command} ; echo -n Press any key to exit... ; read -n1;\"";
+                    arguments = $"-run bash.exe -c \"{command} ;\"";
                 }
+                */
+                var arguments = _settings.LeaveShellOpen ? $"-run {{Bash::bash}} {command}; bash;"
+                    : $"-run {{Bash::bash}} {command}";
                 info = new ProcessStartInfo
                 {
-                    FileName = "bash.exe",
+                    FileName = "ConEmu64.exe",
                     Arguments = arguments
                 };
             }

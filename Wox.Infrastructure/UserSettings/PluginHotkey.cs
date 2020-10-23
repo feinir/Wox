@@ -6,5 +6,7 @@ namespace Wox.Infrastructure.UserSettings
     {
         public string Hotkey { get; set; }
         public string ActionKeyword { get; set; }
+
+        public bool AutoRunFirst { get; set; }
     }
 }

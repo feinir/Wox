@@ -70,6 +70,7 @@
     <system:String x:Key="add">增加</system:String>
     <system:String x:Key="pleaseSelectAnItem">请选择一项</system:String>
     <system:String x:Key="deleteCustomHotkeyWarning">你确定要删除插件 {0} 的热键吗？</system:String>
+    <system:String x:Key="autoRunFirst">自动运行</system:String>
 
     <!--设置，代理-->
     <system:String x:Key="proxy">HTTP 代理</system:String>
